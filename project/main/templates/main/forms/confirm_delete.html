@@ -1,0 +1,27 @@
+{% extends 'layout.html' %} {% block content %}
+
+<div
+  class="d-flex flex-column min-vh-100 justify-content-center align-items-center"
+>
+  <form action="" method="post">
+    {% csrf_token %}
+    <h1 class="mb-5">Удалить "{{ object }}"?</h1>
+    <div class="d-flex justify-content-between">
+      <input
+        type="submit"
+        value="💀Удалить"
+        class="btn btn-outline-secondary"
+      />
+
+      <!-- Кнопка возвращает на страницу назад -->
+      <input
+        action="action"
+        onclick="window.history.go(-1); return false;"
+        type="submit"
+        class="btn btn-dark"
+        value="Отмена"
+      />
+    </div>
+  </form>
+</div>
+{% endblock %}

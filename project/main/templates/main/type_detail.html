@@ -1,0 +1,30 @@
+{% extends 'layout.html' %} {% block content %}
+
+<div class="m-5">
+  <h1>{{type}}</h1>
+  {% for category in type.categories.all %}
+  <p>
+    <a
+      href="{% url 'main:edit-category' category.pk %}"
+      class="text-decoration-none"
+      title="Изменить"
+      >✏️</a
+    >
+    <a
+      href="{% url 'main:delete-category' category.pk %}"
+      class="text-decoration-none"
+      title="Удалить"
+      >🗑</a
+    >
+    <a href="{% url 'main:category' category.pk %}">{{ category}}</a>
+  </p>
+  {% empty %}
+  <p>Нет категорий данного типа</p>
+  {% endfor %}
+  <a
+    href="{% url 'main:create-category-by-type-pk' type.pk %}"
+    class="btn btn-dark"
+    >Добавить категорию</a
+  >
+</div>
+{% endblock %}

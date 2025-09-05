@@ -1,0 +1,56 @@
+{% extends 'layout.html' %} {% block content %}
+<!---->
+
+<div class="row">
+  <div class="col m-5">
+    <h3>Статусы</h3>
+    {% for status in statuses%}
+    <p>
+      <a
+        href="{% url 'main:edit-status' status.pk %}"
+        class="text-decoration-none"
+        title="Изменить"
+        >✏️</a
+      >
+      <a
+        href="{% url 'main:delete-status' status.pk %}"
+        class="text-decoration-none"
+        title="Удалить"
+        >🗑</a
+      >
+      {{status}}
+    </p>
+    {% empty %}
+    <p>Статусов пока нет</p>
+    {%endfor%}
+    <a class="btn btn-dark" href="{% url 'main:create-status'%}"
+      >Добавить статус</a
+    >
+  </div>
+
+  <div class="col m-5">
+    <h3>Типы</h3>
+    {% for type in types%}
+    <p>
+      <a
+        href="{% url 'main:edit-type' type.pk %}"
+        class="text-decoration-none"
+        title="Изменить"
+        >✏️</a
+      >
+      <a
+        href="{% url 'main:delete-type' type.pk %}"
+        class="text-decoration-none"
+        title="Удалить"
+        >🗑</a
+      >
+      <a href="{% url 'main:type' type.pk%}">{{type}}</a>
+    </p>
+    {% empty %}
+    <p>Типов пока нет</p>
+    {%endfor%}
+
+    <a class="btn btn-dark" href="{% url 'main:create-type'%}">Добавить тип</a>
+  </div>
+</div>
+{% endblock %}

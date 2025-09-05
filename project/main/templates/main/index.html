@@ -1,0 +1,121 @@
+{% extends 'layout.html' %} {% block content %} {% load widget_tweaks %}
+
+<div class="container my-3">
+  <a class="mt-3" href="{% url 'main:settings' %}">⚙Управление справочниками</a>
+
+  <form method="get">
+    <div class="container mt-3 d-flex">
+      {% for field in form %}
+      <div class="mx-3">{{field.label}} {{field|add_class:"form-control"}}</div>
+      {% endfor %}
+      <div class="d-flex align-items-center">
+        <button class="btn btn-outline-dark btn-sm" type="submit">
+          Применить фильтры
+        </button>
+        {% if has_filters %}
+        <a href="{% url 'main:index'%}" class="btn btn-outline-dark btn-sm mx-2"
+          >Сбросить
+        </a>
+        {% endif %}
+      </div>
+    </div>
+  </form>
+
+  <table class="table table-sm">
+    <thead>
+      <tr>
+        <th scope="col">Дата</th>
+        <th scope="col">Статус</th>
+        <th scope="col">Тип</th>
+        <th scope="col">Категория</th>
+        <th scope="col">Сумма</th>
+        <th scope="col">Комментарий</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for transaction in page_obj %}
+      <tr>
+        <td>{{ transaction.created_at|date:"d.m.Y" }}</td>
+        <td>{{transaction.status}}</td>
+        <td>{{transaction.subcategory.category.type}}</td>
+        <td>
+          <span>
+            {{transaction.subcategory}} <br />
+            <span class="fw-normal">{{transaction.subcategory.category}}</span>
+          </span>
+        </td>
+        <td>{{transaction.amount}} р</td>
+        <td>
+          {% if transaction.description %}
+          <p>{{ transaction.description }}</p>
+          {% endif %}
+        </td>
+        <td>
+          <a
+            href="{% url 'main:edit-transaction' transaction.pk %}"
+            class="text-decoration-none"
+            title="Изменить"
+            >✏️</a
+          >
+          <a
+            href="{% url 'main:delete-transaction' transaction.pk %}"
+            class="text-decoration-none"
+            title="Удалить"
+            >🗑</a
+          >
+        </td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="7"><h1 class="text-center my-5">Нет записей</h1></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<div class="row my-3">
+  <a
+    class="btn btn-dark"
+    href="{% url 'main:create-transaction'%}"
+    role="button"
+    >Добавить запись</a
+  >
+</div>
+
+<nav class="navbar fixed-bottom">
+  <div class="container justify-content-center">
+    <ul class="pagination my-3">
+      {% if page_obj.has_previous %}
+      <li class="page-item">
+        <a
+          class="page-link"
+          href="?{{parameters}}&page={{ page_obj.previous_page_number }}"
+          >&laquo;</a
+        >
+      </li>
+      {%endif%} {% for p in paginator.page_range %}
+      <!---->
+      {% if page_obj.number == p %}
+      <li class="page-item active">
+        <a class="page-link" href="?{{parameters}}&page={{p}}">{{ p }}</a>
+      </li>
+      {% elif p >= page_obj.number|add:-4 and p <= page_obj.number|add:4 %}
+      <li class="page-item">
+        <a class="page-link" href="?{{parameters}}&page={{ p }}">{{ p }}</a>
+      </li>
+      {% endif %} {% endfor %} {% if page_obj.has_next %}
+      <li class="page-item">
+        <a
+          class="page-link"
+          href="?{{parameters}}&page={{ page_obj.next_page_number }}"
+          >&raquo;</a
+        >
+      </li>
+      {%endif%}
+    </ul>
+  </div>
+</nav>
+
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'layout.html' %} {% block content %}
+
+<div class="m-5">
+  <h1>{{category}}</h1>
+  {% for subcategory in category.subcategories.all %}
+  <p>
+    <a
+      href="{% url 'main:edit-subcategory' subcategory.pk %}"
+      class="text-decoration-none"
+      title="Изменить"
+      >✏️</a
+    >
+    <a
+      href="{% url 'main:delete-subcategory' subcategory.pk %}"
+      class="text-decoration-none"
+      title="Удалить"
+      >🗑</a
+    >
+    {{ subcategory }}
+  </p>
+  {% empty %}
+  <p>У категории "{{category}}" нет подкатегорий</p>
+  {% endfor %}
+  <a href="{% url 'main:create-subcategory' category.pk %}" class="btn btn-dark"
+    >Добавить подкатегорию</a
+  >
+</div>
+{% endblock %}
