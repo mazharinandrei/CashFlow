@@ -19,7 +19,7 @@ class CategoryView:
         return reverse_lazy("categories:detail", kwargs={'pk': self.object.pk})
 
 
-class CategoryCreateView(LoginRequiredMixin, CreatedByViewMixin, CreateView):
+class CategoryCreateView(CategoryView, LoginRequiredMixin, CreatedByViewMixin, CreateView):
     extra_context = {'title': "Добавление категории записей"}
 
     def get_initial(self):
