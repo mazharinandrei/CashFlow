@@ -37,11 +37,13 @@ class Type(models.Model):
     name = models.CharField(verbose_name="Наименование", 
                             max_length=100)
     
+class BaseModel(models.Model):
     created_by = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         editable=False
     )  
+    )
 
     def __str__(self):
         return self.name
