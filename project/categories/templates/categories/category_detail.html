@@ -5,13 +5,13 @@
   {% for subcategory in category.subcategories.all %}
   <p>
     <a
-      href="{% url 'main:edit-subcategory' subcategory.pk %}"
+      href="{% url 'subcategories:edit' subcategory.pk %}"
       class="text-decoration-none"
       title="Изменить"
       >✏️</a
     >
     <a
-      href="{% url 'main:delete-subcategory' subcategory.pk %}"
+      href="{% url 'subcategories:delete' subcategory.pk %}"
       class="text-decoration-none"
       title="Удалить"
       >🗑</a
@@ -21,7 +21,7 @@
   {% empty %}
   <p>У категории "{{category}}" нет подкатегорий</p>
   {% endfor %}
-  <a href="{% url 'main:create-subcategory' category.pk %}" class="btn btn-dark"
+  <a href="{% url 'subcategories:create' category.pk %}" class="btn btn-dark"
     >Добавить подкатегорию</a
   >
 </div>

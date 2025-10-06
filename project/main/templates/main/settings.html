@@ -7,13 +7,13 @@
     {% for status in statuses%}
     <p>
       <a
-        href="{% url 'main:edit-status' status.pk %}"
+        href="{% url 'statuses:edit' status.pk %}"
         class="text-decoration-none"
         title="Изменить"
         >✏️</a
       >
       <a
-        href="{% url 'main:delete-status' status.pk %}"
+        href="{% url 'statuses:delete' status.pk %}"
         class="text-decoration-none"
         title="Удалить"
         >🗑</a
@@ -23,7 +23,7 @@
     {% empty %}
     <p>Статусов пока нет</p>
     {%endfor%}
-    <a class="btn btn-dark" href="{% url 'main:create-status'%}"
+    <a class="btn btn-dark" href="{% url 'statuses:create'%}"
       >Добавить статус</a
     >
   </div>
@@ -33,24 +33,24 @@
     {% for type in types%}
     <p>
       <a
-        href="{% url 'main:edit-type' type.pk %}"
+        href="{% url 'types:edit' type.pk %}"
         class="text-decoration-none"
         title="Изменить"
         >✏️</a
       >
       <a
-        href="{% url 'main:delete-type' type.pk %}"
+        href="{% url 'types:delete' type.pk %}"
         class="text-decoration-none"
         title="Удалить"
         >🗑</a
       >
-      <a href="{% url 'main:type' type.pk%}">{{type}}</a>
+      <a href="{% url 'types:detail' type.pk%}">{{type}}</a>
     </p>
     {% empty %}
     <p>Типов пока нет</p>
     {%endfor%}
 
-    <a class="btn btn-dark" href="{% url 'main:create-type'%}">Добавить тип</a>
+    <a class="btn btn-dark" href="{% url 'types:create'%}">Добавить тип</a>
   </div>
 </div>
 {% endblock %}

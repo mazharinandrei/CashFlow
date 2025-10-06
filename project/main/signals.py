@@ -3,8 +3,11 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.db import transaction
 
-from .models import Category, Status, Subcategory, Type
-from .defaults import DEFAULT_USER_DATA 
+from subcategories.models import Subcategory
+from .defaults import DEFAULT_USER_DATA
+from categories.models import Category
+from statuses.models import Status
+from transaction_types.models import Type
 
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
@@ -47,7 +50,7 @@ def _create_defaults_for_user(new_user):
         
         for dict_category in dict_type["categories"]:
 
-            category_object = Category(type=type_object, 
+            category_object = Category(type=type_object,
                                                 name=dict_category["category_name"], 
                                                 created_by=new_user)
             

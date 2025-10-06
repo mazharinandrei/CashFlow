@@ -53,13 +53,13 @@
         </td>
         <td>
           <a
-            href="{% url 'main:edit-transaction' transaction.pk %}"
+            href="{% url 'transactions:edit' transaction.pk %}"
             class="text-decoration-none"
             title="Изменить"
             >✏️</a
           >
           <a
-            href="{% url 'main:delete-transaction' transaction.pk %}"
+            href="{% url 'transactions:delete' transaction.pk %}"
             class="text-decoration-none"
             title="Удалить"
             >🗑</a
@@ -78,11 +78,12 @@
 <div class="row my-3">
   <a
     class="btn btn-dark"
-    href="{% url 'main:create-transaction'%}"
+    href="{% url 'transactions:create'%}"
     role="button"
     >Добавить запись</a
   >
 </div>
+
 
 <nav class="navbar fixed-bottom">
   <div class="container justify-content-center">

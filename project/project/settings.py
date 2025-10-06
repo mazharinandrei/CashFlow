@@ -26,7 +26,14 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'main',
-    
+
+
+    'statuses',
+    'transaction_types',
+    'categories',
+    'subcategories',
+    'transactions',
+
     'widget_tweaks',
 
     'django.contrib.admin',
@@ -52,7 +59,7 @@ ROOT_URLCONF = 'project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates'],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
